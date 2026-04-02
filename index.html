@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống Tra cứu Thuế & Sổ sách HKD 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="data.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .modal { transition: opacity 0.25s ease; }
+        body.modal-active { overflow: hidden; }
+        .example-table th, .example-table td { border: 1px solid #e2e8f0; padding: 8px; text-align: left; }
+        .example-table th { background-color: #f8fafc; font-size: 11px; text-transform: uppercase; color: #64748b; }
+        .example-table td { font-size: 12px; }
+        #tinh-huong-details > summary { list-style: none; }
+        #tinh-huong-details > summary::-webkit-details-marker { display: none; }
+        #tinh-huong-details .tinh-huong-chev { transition: transform 0.2s ease; }
+        #tinh-huong-details[open] .tinh-huong-chev { transform: rotate(180deg); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <header class="bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white py-16 px-4 shadow-2xl">
+        <div class="max-w-6xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">Cổng Thông Tin Thuế & Kế Toán 2026</h1>
+            <p class="text-blue-100 text-lg font-light">Số hóa Nghị định 68/2026, Thông tư 152/2025 và Luật Thuế GTGT/TNCN 2024-2025</p>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto py-12 px-4">
+        <div class="mb-8 bg-white rounded-3xl border border-slate-200 shadow-sm p-6 flex items-start justify-between gap-4">
+            <div class="flex items-start">
+                <span class="bg-slate-900 text-white p-2 rounded-xl mr-4"><i class="fa-solid fa-file-lines"></i></span>
+                <div>
+                    <p class="text-xs font-black text-slate-400 uppercase tracking-widest">Tài liệu tham khảo</p>
+                    <p class="text-sm font-bold text-slate-800 mt-1">Thông tư 18/2026/TT-BTC; Thông tư 152/2025/TT-BTC</p>
+                </div>
+            </div>
+            <div class="shrink-0 flex flex-col gap-2">
+                <a href="https://datafiles.chinhphu.vn/cpp/files/vbpq/2026/3/18-btc.signed.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-xs font-black uppercase tracking-widest transition-colors">
+                    TT18 PDF
+                    <i class="fa-solid fa-arrow-up-right-from-square ml-2"></i>
+                </a>
+                <a href="https://drive.google.com/file/d/1zBlt8tZ3zM1gT6XP2swOYDlaEoHED2U4/view" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center px-4 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-xs font-black uppercase tracking-widest transition-colors">
+                    TT152
+                    <i class="fa-solid fa-arrow-up-right-from-square ml-2"></i>
+                </a>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300">
+                <div class="bg-slate-50 p-8 border-b border-slate-100">
+                    <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-bold text-[10px] uppercase">Nhóm 1</span>
+                    <h2 class="text-2xl font-bold mt-3 text-slate-800">Doanh thu ≤ 500tr</h2>
+                    <p class="text-slate-500 text-sm mt-2">Miễn thuế GTGT & TNCN.</p>
+                </div>
+                <div class="p-8 space-y-8">
+                    <section>
+                        <h3 class="font-bold text-slate-400 text-xs uppercase tracking-widest mb-4 flex items-center"><i class="fa-solid fa-file-invoice text-blue-500 mr-2"></i>Biểu mẫu thuế</h3>
+                        <div class="space-y-3">
+                            <button onclick="openModal('01/TKN-CNKD')" class="w-full text-left p-3 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 text-sm font-bold transition-all border border-blue-100">01/TKN-CNKD: Thông báo DT năm</button>
+                            <button onclick="openModal('01/BK-STK')" class="w-full text-left p-3 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 text-sm font-bold transition-all border border-slate-100">01/BK-STK: Thông báo TK/Ví</button>
+                        </div>
+                    </section>
+                    <section>
+                        <h3 class="font-bold text-slate-400 text-xs uppercase tracking-widest mb-4 flex items-center"><i class="fa-solid fa-book text-emerald-500 mr-2"></i>Hệ thống sổ kế toán</h3>
+                        <button onclick="openModal('S1a-HKD')" class="w-full text-left p-4 rounded-2xl border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 transition-all shadow-sm">
+                            <p class="text-xs font-black text-emerald-800 uppercase">Sổ S1a-HKD</p>
+                            <p class="text-[11px] text-emerald-600 mt-1 italic">Sổ doanh thu bán hàng hóa, dịch vụ.</p>
+                        </button>
+                    </section>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl shadow-2xl border-2 border-blue-600 overflow-hidden relative transform md:-translate-y-6">
+                <div class="absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-black px-4 py-1.5 uppercase rounded-bl-2xl">Lựa chọn Phổ biến</div>
+                <div class="bg-blue-600 p-8 border-b border-blue-700 text-white">
+                    <span class="bg-white/20 text-white px-3 py-1 rounded-full font-bold text-[10px] uppercase">Nhóm 2</span>
+                    <h2 class="text-2xl font-bold mt-3">DT 500tr - 3 tỷ</h2>
+                    <p class="text-blue-100 text-sm mt-2 opacity-80 italic text-wrap">Thuế tính theo Tỷ lệ % Doanh thu.</p>
+                </div>
+                <div class="p-8 space-y-8">
+                    <section>
+                        <h3 class="font-bold text-slate-400 text-xs uppercase tracking-widest mb-4 flex items-center"><i class="fa-solid fa-file-invoice-dollar text-blue-500 mr-2"></i>Biểu mẫu thuế</h3>
+                        <button onclick="openModal('01/CNKD')" class="w-full text-left p-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold shadow-lg transition-all">01/CNKD: Tờ khai Thuế Quý</button>
+                    </section>
+                    <section>
+                        <h3 class="font-bold text-slate-400 text-xs uppercase tracking-widest mb-4 flex items-center"><i class="fa-solid fa-table-list text-emerald-500 mr-2"></i>Hệ thống sổ kế toán</h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button onclick="openModal('S2a-HKD')" class="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 font-bold text-xs border border-slate-200 transition-all">S2a-HKD (Doanh thu)</button>
+                            <button onclick="openModal('S2d-HKD')" class="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 font-bold text-xs border border-slate-200 transition-all">S2d-HKD (Tồn kho)</button>
+                            <button onclick="openModal('S2e-HKD')" class="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 font-bold text-xs border border-slate-200 transition-all">S2e-HKD (Tiền)</button>
+                            <button onclick="openModal('S3a-HKD')" class="p-3 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs border border-indigo-100 col-span-2 transition-all">S3a-HKD (Thuế khác)</button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 rounded-3xl shadow-sm border border-slate-800 overflow-hidden hover:shadow-xl transition-all duration-300">
+                <div class="bg-slate-800 p-8 border-b border-slate-700 text-white">
+                    <span class="bg-white/10 text-slate-300 px-3 py-1 rounded-full font-bold text-[10px] uppercase">Nhóm 3</span>
+                    <h2 class="text-2xl font-bold mt-3">DT 3 tỷ - 50 tỷ</h2>
+                    <p class="text-slate-400 text-sm mt-2 font-light italic">Kê khai Doanh thu - Chi phí.</p>
+                </div>
+                <div class="p-8 space-y-8">
+                    <section>
+                        <h3 class="font-bold text-slate-500 text-xs uppercase tracking-widest mb-4 flex items-center"><i class="fa-solid fa-calendar-check text-blue-400 mr-2"></i>Biểu mẫu thuế</h3>
+                        <div class="space-y-3">
+                            <button onclick="openModal('01/CNKD')" class="w-full text-left p-3 rounded-xl bg-white/5 hover:bg-white/10 text-white text-sm font-bold border border-white/10 transition-all">01/CNKD: Tờ khai Tạm nộp</button>
+                            <button onclick="openModal('02/QTT-TNCN')" class="w-full text-left p-3 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 text-sm font-bold border border-rose-500/20 transition-all">02/QTT-TNCN: Quyết toán Năm</button>
+                        </div>
+                    </section>
+                    <section>
+                        <h3 class="font-bold text-slate-500 text-xs uppercase tracking-widest mb-4 flex items-center"><i class="fa-solid fa-boxes-stacked text-emerald-400 mr-2"></i>Hệ thống sổ kế toán</h3>
+                        <div class="grid grid-cols-4 gap-2 text-[10px] font-bold text-center text-slate-300">
+                            <button onclick="openModal('S2b-HKD')" class="bg-white/5 border border-white/10 p-2 rounded hover:bg-white/10">S2b</button>
+                            <button onclick="openModal('S2c-HKD')" class="bg-rose-500/20 border border-rose-500/30 p-2 rounded hover:bg-rose-500/30 text-rose-300">S2c</button>
+                            <button onclick="openModal('S2d-HKD')" class="bg-white/5 border border-white/10 p-2 rounded hover:bg-white/10">S2d</button>
+                            <button onclick="openModal('S2e-HKD')" class="bg-white/5 border border-white/10 p-2 rounded hover:bg-white/10">S2e</button>
+                            <button onclick="openModal('S3a-HKD')" class="bg-white/5 border border-white/10 p-2 rounded hover:bg-white/10 col-span-4">S3a (Thuế khác)</button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-6 rounded-r-2xl flex items-start">
+                <i class="fa-solid fa-receipt text-amber-500 text-2xl mt-1"></i>
+                <div class="ml-4">
+                    <h4 class="font-bold text-amber-900 italic">Hóa đơn điện tử 2026</h4>
+                    <p class="text-amber-800 text-sm mt-1">Bắt buộc đối với tất cả HKD có doanh thu thực tế từ 01 tỷ đồng/năm trở lên.</p>
+                </div>
+            </div>
+            <div class="bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded-r-2xl flex items-start">
+                <i class="fa-solid fa-credit-card text-indigo-500 text-2xl mt-1"></i>
+                <div class="ml-4">
+                    <h4 class="font-bold text-indigo-900 italic">Thanh toán ≥ 5 Triệu</h4>
+                    <p class="text-indigo-800 text-sm mt-1">Phải thanh toán không dùng tiền mặt để được ghi nhận chi phí hợp lệ (Nhóm 3).</p>
+                </div>
+            </div>
+        </div>
+
+        <details id="tinh-huong-details" class="mt-20 mb-12 bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+            <summary class="cursor-pointer select-none p-6 md:p-8 flex items-center justify-between hover:bg-slate-50 transition-colors">
+                <div class="flex items-center">
+                    <span class="bg-amber-500 text-white p-2 rounded-xl mr-4"><i class="fa-solid fa-lightbulb"></i></span>
+                    <span class="text-2xl md:text-3xl font-black text-slate-800">50 Tình Huống Thuế HKD/CNKD Thường Gặp</span>
+                </div>
+                <i class="fa-solid fa-chevron-down text-slate-400 tinh-huong-chev"></i>
+            </summary>
+            <div class="px-6 md:px-8 pb-6 md:pb-8">
+                <div id="tinh-huong-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Sẽ được render từ data.js -->
+                </div>
+                <p class="text-slate-400 text-xs mt-4 italic">* Nội dung được tổng hợp từ tài liệu "50 Tình Huống Thuế HKD/CNKD" và Thông tư 152/2025/TT-BTC.</p>
+            </div>
+        </details>
+    </main>
+
+    <div id="modal" class="fixed inset-0 z-50 flex items-center justify-center opacity-0 pointer-events-none modal transition-all duration-300 px-4">
+        <div class="fixed inset-0 bg-slate-900/80 backdrop-blur-md" onclick="closeModal()"></div>
+        <div class="bg-white rounded-[2rem] shadow-2xl z-10 w-full max-w-3xl overflow-hidden transform scale-95 transition-all duration-300" id="modal-content">
+            <div id="modal-header" class="p-8 bg-blue-700 text-white flex justify-between items-center">
+                <div class="flex items-center space-x-4">
+                    <div class="bg-white/20 p-3 rounded-2xl"><i class="fa-solid fa-magnifying-glass-chart text-2xl"></i></div>
+                    <h2 id="modal-title" class="text-2xl font-black tracking-tight">Chi tiết mẫu</h2>
+                </div>
+                <button onclick="closeModal()" class="text-white/60 hover:text-white transition-colors"><i class="fa-solid fa-xmark text-3xl"></i></button>
+            </div>
+            <div class="p-8 space-y-8 max-h-[70vh] overflow-y-auto">
+                <div id="modal-info" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-50 p-6 rounded-3xl">
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Đối tượng áp dụng</p>
+                        <p id="modal-when" class="text-sm font-bold text-slate-700 leading-relaxed"></p>
+                    </div>
+                    <div class="bg-slate-50 p-6 rounded-3xl">
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Kỳ hạn thực hiện</p>
+                        <p id="modal-period" class="text-sm font-bold text-slate-700 leading-relaxed"></p>
+                    </div>
+                </div>
+                <div id="modal-content-body" class="space-y-4">
+                    <p id="modal-table-label" class="text-[10px] font-black text-blue-500 uppercase tracking-widest flex items-center"><i class="fa-solid fa-table mr-2"></i>Dữ liệu ví dụ (Minh họa mô phỏng)</p>
+                    <div id="modal-table" class="overflow-hidden rounded-2xl border border-slate-200">
+                    </div>
+                    <div id="modal-situation" class="hidden space-y-4">
+                        <div class="bg-blue-50 p-6 rounded-3xl border border-blue-100">
+                            <p class="text-xs font-black text-blue-600 uppercase mb-2">Câu hỏi tình huống</p>
+                            <p id="situation-q" class="text-slate-800 font-bold"></p>
+                        </div>
+                        <div class="bg-emerald-50 p-6 rounded-3xl border border-emerald-100">
+                            <p class="text-xs font-black text-emerald-600 uppercase mb-2">Giải đáp chuyên gia</p>
+                            <p id="situation-a" class="text-slate-700 leading-relaxed"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-6 bg-slate-50 border-t border-slate-100 text-center">
+                <button onclick="closeModal()" class="px-12 py-4 bg-blue-700 text-white rounded-full text-sm font-black shadow-xl hover:bg-blue-800 transition-all uppercase tracking-widest">Đóng tra cứu</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const details = {
+            "01/TKN-CNKD": {
+                title: "01/TKN-CNKD: Thông báo doanh thu năm",
+                when: "Hộ kinh doanh doanh thu ≤ 500 triệu đồng/năm (theo Luật Thuế mới).",
+                period: "Nộp 01 lần/năm. Hạn chót 31/01 năm tiếp theo.",
+                table: `<table class=\"w-full example-table\"><thead><tr><th>Chỉ tiêu</th><th>Nội dung</th><th>Giá trị (VNĐ)</th></tr></thead><tbody><tr><td>1</td><td>Doanh thu bán hàng hóa</td><td class='text-right'>420.000.000</td></tr><tr><td>2</td><td>Doanh thu dịch vụ</td><td class='text-right'>30.000.000</td></tr><tr class=\"font-bold bg-blue-50\"><td>TỔNG</td><td>Doanh thu thực tế cả năm</td><td class='text-right'>450.000.000</td></tr></tbody></table>`
+            },
+            "01/CNKD": {
+                title: "01/CNKD: Tờ khai Thuế đối với Hộ kinh doanh, Cá nhân kinh doanh",
+                when: "Áp dụng cho HKD, CNKD nộp thuế theo phương pháp kê khai hoặc theo tỷ lệ % trên doanh thu.",
+                period: "Khai theo Quý hoặc Tháng tùy thuộc vào quy mô và lựa chọn của người nộp thuế.",
+                table: `
+                    <div class='p-4 text-center text-sm text-slate-600'><p><b>Mẫu số 01/CNKD</b></p><p class='italic'>(Ban hành kèm theo Thông tư số 18/2026/TT-BTC)</p></div>
+                    
+                    <div class='p-4 border-b'>
+                        <h3 class='font-bold text-slate-800 mb-2'>A. KÊ KHAI THUẾ GIÁ TRỊ GIA TĂNG (GTGT), THUẾ THU NHẬP CÁ NHÂN (TNCN)</h3>
+                        <table class='w-full example-table text-sm'>
+                            <thead>
+                                <tr><th class='text-left'>I. Doanh thu tính thuế phát sinh trong kỳ</th><th class='text-right'>Số tiền (VNĐ)</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td class='pl-4'>1. Phân phối, cung cấp hàng hóa (GTGT 1%, TNCN 0.5%)</td><td class='text-right'>800.000.000</td></tr>
+                                <tr><td class='pl-4'>2. Dịch vụ, xây dựng không bao thầu NVL (GTGT 5%, TNCN 2%)</td><td class='text-right'>200.000.000</td></tr>
+                            </tbody>
+                        </table>
+                        <table class='w-full example-table text-sm mt-4'>
+                            <thead>
+                                <tr><th class='text-left'>II. Số thuế phải nộp</th><th class='text-right'>Số tiền (VNĐ)</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr class='font-bold'><td class='pl-4'>1. Thuế GTGT</td><td class='text-right'>18.000.000</td></tr>
+                                <tr><td class='pl-8'>- Thuế GTGT của Hàng hóa (1% x 800tr)</td><td class='text-right'>8.000.000</td></tr>
+                                <tr><td class='pl-8'>- Thuế GTGT của Dịch vụ (5% x 200tr)</td><td class='text-right'>10.000.000</td></tr>
+                                <tr class='font-bold'><td class='pl-4'>2. Thuế TNCN</td><td class='text-right'>8.000.000</td></tr>
+                                <tr><td class='pl-8'>- Thuế TNCN của Hàng hóa (0.5% x 800tr)</td><td class='text-right'>4.000.000</td></tr>
+                                <tr><td class='pl-8'>- Thuế TNCN của Dịch vụ (2% x 200tr)</td><td class='text-right'>4.000.000</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class='p-4 border-b'>
+                        <h3 class='font-bold text-slate-800 mb-2'>B. KÊ KHAI THUẾ TIÊU THỤ ĐẶC BIỆT (TTĐB)</h3>
+                        <table class='w-full example-table text-[10px]'>
+                            <thead>
+                                <tr><th>Hàng hóa, dịch vụ</th><th>Sản lượng</th><th>Giá tính thuế TTĐB</th><th>Thuế suất</th><th>Thuế TTĐB phải nộp</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Bán rượu trên 20 độ</td><td class='text-center'>50 chai</td><td class='text-right'>7.500.000</td><td class='text-center'>65%</td><td class='text-right'>4.875.000</td>
+                                </tr>
+                                <tr class='font-bold bg-slate-50'><td colspan='4'>Tổng cộng</td><td class='text-right'>4.875.000</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class='p-4 border-b'>
+                        <h3 class='font-bold text-slate-800 mb-2'>C. KÊ KHAI THUẾ TÀI NGUYÊN, BẢO VỆ MÔI TRƯỜNG (BVMT)</h3>
+                        <table class='w-full example-table text-[10px]'>
+                            <thead>
+                                <tr><th>Tên loại thuế/phí</th><th>Sản lượng</th><th>Giá tính thuế</th><th>Thuế suất</th><th>Số phải nộp</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1. Thuế tài nguyên (nước)</td><td class='text-center'>100 m³</td><td class='text-right'>8.000</td><td class='text-center'>15%</td><td class='text-right'>1.200.000</td>
+                                </tr>
+                                <tr>
+                                    <td>2. Thuế BVMT (túi nilon)</td><td class='text-center'>17 kg</td><td class='text-right'>50.000</td><td class='text-center'>-</td><td class='text-right'>850.000</td>
+                                </tr>
+                                <tr class='font-bold bg-slate-50'><td colspan='4'>Tổng cộng</td><td class='text-right'>2.050.000</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class='p-4'>
+                        <h3 class='font-bold text-slate-800 mb-2'>D. HỖ TRỢ TỰ ĐỘNG THÔNG TIN NỘP THUẾ</h3>
+                        <table class='w-full example-table text-sm'>
+                            <thead>
+                                <tr><th class='text-left'>Loại thuế</th><th class='text-right'>Số tiền phải nộp (VNĐ)</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1. Thuế GTGT</td><td class='text-right'>18.000.000</td></tr>
+                                <tr><td>2. Thuế TNCN</td><td class='text-right'>8.000.000</td></tr>
+                                <tr><td>3. Thuế TTĐB</td><td class='text-right'>4.875.000</td></tr>
+                                <tr><td>4. Thuế Tài nguyên, BVMT</td><td class='text-right'>2.050.000</td></tr>
+                                <tr class='font-black bg-blue-100'><td>TỔNG SỐ TIỀN PHẢI NỘP VÀO NGÂN SÁCH NHÀ NƯỚC</td><td class='text-right'>32.925.000</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `
+            },
+            "02/QTT-TNCN": {
+                title: "02/QTT-TNCN: Tờ khai quyết toán thuế TNCN",
+                when: "HKD nộp thuế theo phương pháp kê khai (Nhóm 3).",
+                period: "Khai quyết toán theo năm. Hạn chót 31/03 năm sau.",
+                table: `
+                    <div class='p-4 text-center text-sm text-slate-600'><p><b>Mẫu số 02/QTT-TNCN</b></p></div>
+                    <table class='w-full example-table text-sm'>
+                        <thead>
+                            <tr><th class='text-left'>Chỉ tiêu</th><th class='text-right'>Số tiền (VNĐ)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>[21] Tổng doanh thu trong năm tính thuế</td><td class='text-right'>4.500.000.000</td></tr>
+                            <tr><td>[22] Tổng chi phí được trừ trong năm</td><td class='text-right'>3.200.000.000</td></tr>
+                            <tr class='font-bold'><td class='text-rose-600'>[23] Thu nhập tính thuế trong năm</td><td class='text-right text-rose-600'>1.300.000.000</td></tr>
+                            <tr><td>[24] Giảm trừ cho bản thân</td><td class='text-right'>132.000.000</td></tr>
+                            <tr><td>[25] Giảm trừ cho người phụ thuộc (x2)</td><td class='text-right'>105.600.000</td></tr>
+                            <tr class='font-bold'><td class='text-blue-600'>[28] Thu nhập tính thuế sau giảm trừ</td><td class='text-right text-blue-600'>1.062.400.000</td></tr>
+                            <tr class='font-black bg-rose-100'><td >[32] TỔNG SỐ THUẾ TNCN PHẢI NỘP</td><td class='text-right'>...</td></tr>
+                        </tbody>
+                    </table>`
+            },
+            "S1a-HKD": {
+                title: "Sổ S1a-HKD: Sổ doanh thu bán hàng hóa, dịch vụ",
+                when: "HKD không chịu thuế GTGT, không phải nộp thuế TNCN (Doanh thu ≤ 500 triệu/năm).",
+                period: "Ghi chép hàng ngày hoặc định kỳ theo nghiệp vụ phát sinh.",
+                table: `
+                    <div class='p-4 text-center text-sm text-slate-600'>
+                        <p><b>Mẫu số S1a-HKD</b></p>
+                        <p class='italic'>(Kèm theo Thông tư số 152/2025/TT-BTC)</p>
+                    </div>
+                    <table class='w-full example-table'>
+                        <thead>
+                            <tr><th>Ngày tháng</th><th>Diễn giải</th><th>Số tiền</th></tr>
+                            <tr><th class='font-normal'>(A)</th><th class='font-normal'>(B)</th><th class='font-normal'>(1)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>02/01/2026</td><td>Bán hàng tạp hóa (tổng hợp cuối ngày)</td><td class='text-right'>2.500.000</td></tr>
+                            <tr><td>03/01/2026</td><td>Bán hàng tạp hóa (tổng hợp cuối ngày)</td><td class='text-right'>3.100.000</td></tr>
+                            <tr class='font-bold bg-slate-50'><td colspan='2'>Tổng cộng</td><td class='text-right'>5.600.000</td></tr>
+                        </tbody>
+                    </table>`
+            },
+            "S2a-HKD": {
+                title: "Sổ S2a-HKD: Sổ doanh thu (tính thuế theo % doanh thu)",
+                when: "HKD nộp thuế GTGT, TNCN theo tỷ lệ % trên doanh thu (Nhóm 2).",
+                period: "Ghi chép hàng ngày, tổng hợp cuối kỳ để kê khai thuế.",
+                table: `
+                    <div class='p-4 text-center text-sm text-slate-600'><p><b>Mẫu số S2a-HKD</b></p></div>
+                    <table class='w-full example-table text-[11px]'>
+                        <thead>
+                            <tr><th colspan='3'>Chứng từ</th><th rowspan='2'>Diễn giải</th><th rowspan='2'>Số tiền</th></tr>
+                            <tr><th>Số hiệu</th><th>Ngày, tháng</th><th></th></tr>
+                            <tr><th class='font-normal'>(A)</th><th class='font-normal'>(B)</th><th></th><th class='font-normal'>(C)</th><th class='font-normal'>(1)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr class='font-bold bg-slate-100'><td colspan='5'>1. Ngành nghề: Phân phối, cung cấp hàng hóa (GTGT 1%, TNCN 0.5%)</td></tr>
+                            <tr><td>HĐ015</td><td>05/01</td><td></td><td>Bán lẻ quần áo</td><td class='text-right'>10.000.000</td></tr>
+                            <tr class='font-bold bg-slate-50'><td colspan='4'>Tổng cộng (1)</td><td class='text-right'>10.000.000</td></tr>
+                            <tr class='text-blue-600'><td colspan='4'>Thuế GTGT phải nộp (1% x 10.000.000)</td><td class='text-right'>100.000</td></tr>
+                            <tr class='text-rose-600'><td colspan='4'>Thuế TNCN phải nộp (0.5% x 10.000.000)</td><td class='text-right'>50.000</td></tr>
+
+                            <tr class='font-bold bg-slate-100'><td colspan='5'>2. Ngành nghề: Dịch vụ (GTGT 5%, TNCN 2%)</td></tr>
+                            <tr><td>HĐ016</td><td>06/01</td><td></td><td>Dịch vụ may đo</td><td class='text-right'>5.000.000</td></tr>
+                            <tr class='font-bold bg-slate-50'><td colspan='4'>Tổng cộng (2)</td><td class='text-right'>5.000.000</td></tr>
+                            <tr class='text-blue-600'><td colspan='4'>Thuế GTGT phải nộp (5% x 5.000.000)</td><td class='text-right'>250.000</td></tr>
+                            <tr class='text-rose-600'><td colspan='4'>Thuế TNCN phải nộp (2% x 5.000.000)</td><td class='text-right'>100.000</td></tr>
+
+                            <tr class='font-black bg-blue-100'><td colspan='4'>TỔNG THUẾ GTGT PHẢI NỘP</td><td class='text-right'>350.000</td></tr>
+                            <tr class='font-black bg-rose-100'><td colspan='4'>TỔNG THUẾ TNCN PHẢI NỘP</td><td class='text-right'>150.000</td></tr>
+                        </tbody>
+                    </table>`
+            },
+            "S2b-HKD": {
+                title: "Sổ S2b-HKD: Sổ doanh thu bán hàng hóa, dịch vụ",
+                when: "HKD nộp thuế theo phương pháp kê khai (doanh thu - chi phí) (Nhóm 3).",
+                period: "Ghi chép hàng ngày để xác định tổng doanh thu trong kỳ.",
+                table: `
+                    <div class='p-4 text-center text-sm text-slate-600'><p><b>Mẫu số S2b-HKD</b></p></div>
+                    <table class='w-full example-table'>
+                        <thead>
+                            <tr><th colspan='2'>Chứng từ</th><th rowspan='2'>Diễn giải</th><th rowspan='2'>Số tiền</th></tr>
+                            <tr><th>Số hiệu</th><th>Ngày, tháng</th></tr>
+                            <tr><th class='font-normal'>(A)</th><th class='font-normal'>(B)</th><th class='font-normal'>(C)</th><th class='font-normal'>(1)</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr class='font-bold bg-slate-100'><td colspan='4'>1. Ngành nghề: Phân phối, cung cấp hàng hóa</td></tr>
+                            <tr><td>HĐ001</td><td>02/01/2026</td><td>Doanh thu bán lô hàng A</td><td class='text-right'>150.000.000</td></tr>
+                            <tr class='font-bold bg-slate-50'><td colspan='3'>Tổng cộng (1)</td><td class='text-right'>150.000.000</td></tr>
+                            <tr class='text-blue-600'><td colspan='3'>Thuế GTGT phải nộp (1% x 150.000.000)</td><td class='text-right'>1.500.000</td></tr>
+                            
+                            <tr class='font-bold bg-slate-100'><td colspan='4'>2. Ngành nghề: Dịch vụ</td></tr>
+                            <tr><td>HĐ002</td><td>03/01/2026</td><td>Doanh thu dịch vụ tư vấn B</td><td class='text-right'>25.000.000</td></tr>
+                            <tr class='font-bold bg-slate-50'><td colspan='3'>Tổng cộng (2)</td><td class='text-right'>25.000.000</td></tr>
+                            <tr class='text-blue-600'><td colspan='3'>Thuế GTGT phải nộp (5% x 25.000.000)</td><td class='text-right'>1.250.000</td></tr>
+
+                            <tr class='font-black bg-blue-100'><td colspan='3'>TỔNG THUẾ GTGT PHẢI NỘP</td><td class='text-right'>2.750.000</td></tr>
+                        </tbody>
+                    </table>`
+            },
+            "S2c-HKD": {
+                title: "Sổ S2c-HKD: Sổ chi tiết doanh thu, chi phí",
+                when: "HKD nộp thuế theo phương pháp kê khai (Nhóm 3).",
+                period: "Tổng hợp cuối kỳ (tháng/quý) để xác định thu nhập tính thuế.",
+                table: `
+                    <div class='p-4 text-center text-sm text-slate-600'><p><b>Mẫu số S2c-HKD</b></p></div>
+                    <table class='w-full example-table'>
+                        <thead>
+                            <tr><th>Diễn giải</th><th>Số tiền</th></tr>
+                            <tr><th class='font-normal text-center'>C</th><th class='font-normal text-center'>1</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr class='font-bold'><td class='pl-4'>1. Doanh thu bán hàng hóa, dịch vụ</td><td class='text-right'>175.000.000</td></tr>
+                            <tr class='font-bold'><td class='pl-4'>2. Chi phí hợp lý</td><td class='text-right'>116.000.000</td></tr>
+                            <tr><td class='pl-8'>a) Chi phí nguyên liệu, vật liệu...</td><td class='text-right'>80.000.000</td></tr>
+                            <tr><td class='pl-8'>b) Chi phí tiền lương, tiền công...</td><td class='text-right'>20.000.000</td></tr>
+                            <tr><td class='pl-8'>c) Chi phí khấu hao tài sản cố định...</td><td class='text-right'>5.000.000</td></tr>
+                            <tr><td class='pl-8'>d) Chi phí dịch vụ mua ngoài...</td><td class='text-right'>7.000.000</td></tr>
+                            <tr><td class='pl-8'>e) Chi phí trả lãi tiền vay...</td><td class='text-right'>3.000.000</td></tr>
+                            <tr><td class='pl-8'>f) Các khoản chi khác...</td><td class='text-right'>1.000.000</td></tr>
+                            <tr class='font-bold'><td class='pl-4'>3. Chênh lệch (3) = (1) - (2)</td><td class='text-right'>59.000.000</td></tr>
+                            <tr class='font-bold text-rose-600 bg-rose-50'><td class='pl-4'>4. Tổng số thuế TNCN phải nộp (4) = (3) x thuế suất</td><td class='text-right'>...</td></tr>
+                        </tbody>
+                    </table>`
+            },
+            "S2d-HKD": {
+                title: "Sổ S2d-HKD: Sổ chi tiết vật liệu, dụng cụ, sản phẩm, hàng hóa",
+                when: "HKD có quản lý nhập-xuất-tồn kho (Nhóm 2, 3).",
+                period: "Ghi chép khi phát sinh nghiệp vụ nhập, xuất kho.",
+                table: `
+                    <div class='p-4 text-center text-sm text-slate-600'><p><b>Mẫu số S2d-HKD</b></p><p>Tên vật liệu, hàng hóa: Áo sơ mi</p></div>
+                    <table class='w-full example-table text-[10px]'>
+                        <thead>
+                            <tr>
+                                <th colspan='2'>Chứng từ</th>
+                                <th rowspan='2'>Diễn giải</th>
+                                <th rowspan='2'>Đơn vị tính</th>
+                                <th rowspan='2'>Đơn giá</th>
+                                <th colspan='2'>Nhập</th>
+                                <th colspan='2'>Xuất</th>
+                                <th colspan='2'>Tồn</th>
+                                <th rowspan='2'>Ghi chú</th>
+                            </tr>
+                            <tr>
+                                <th>Số hiệu</th>
+                                <th>Ngày, tháng</th>
+                                <th>Số lượng</th>
+                                <th>Thành tiền</th>
+                                <th>Số lượng</th>
+                                <th>Thành tiền</th>
+                                <th>Số lượng</th>
+                                <th>Thành tiền</th>
+                            </tr>
+                            <tr>
+                                <th class='font-normal'>A</th><th class='font-normal'>B</th><th class='font-normal'>C</th><th class='font-normal'>D</th>
+                                <th class='font-normal'>1</th><th class='font-normal'>2</th><th class='font-normal'>3</th><th class='font-normal'>4</th>
+                                <th class='font-normal'>5</th><th class='font-normal'>6</th><th class='font-normal'>7</th><th class='font-normal'>8</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td></td><td></td><td>Số dư đầu kỳ</td><td></td><td></td><td></td><td></td><td></td><td></td><td class='text-center'>10</td><td class='text-right'>1.000.000</td><td></td></tr>
+                            <tr><td>PN01</td><td>05/01</td><td>Nhập hàng từ NCC A</td><td class='text-center'>Cái</td><td class='text-right'>100.000</td><td class='text-center'>20</td><td class='text-right'>2.000.000</td><td></td><td></td><td class='text-center'>30</td><td class='text-right'>3.000.000</td><td></td></tr>
+                            <tr><td>PX01</td><td>10/01</td><td>Xuất bán cho khách B</td><td class='text-center'>Cái</td><td class='text-right'>100.000</td><td></td><td></td><td class='text-center'>15</td><td class='text-right'>1.500.000</td><td class='text-center'>15</td><td class='text-right'>1.500.000</td><td></td></tr>
+                            <tr class='font-bold bg-slate-50'><td colspan='5'>Cộng phát sinh trong kỳ</td><td class='text-center'>20</td><td class='text-right'>2.000.000</td><td class='text-center'>15</td><td class='text-right'>1.500.000</td><td colspan='3'>X</td></tr>
+                            <tr class='font-bold bg-slate-50'><td colspan='9'>Số dư cuối kỳ</td><td class='text-center'>15</td><td class='text-right'>1.500.000</td><td>X</td></tr>
+                        </tbody>
+                    </table>`
+            },
+            "S2e-HKD": {
+                title: "Sổ S2e-HKD: Sổ chi tiết tiền",
+                when: "HKD có quản lý dòng tiền (Nhóm 2, 3).",
+                period: "Ghi chép khi phát sinh thu, chi and tổng hợp cuối kỳ.",
+                table: `
+                    <div class='p-4 text-center text-sm text-slate-600'><p><b>Mẫu số S2e-HKD</b></p></div>
+                    <table class='w-full example-table'>
+                        <thead>
+                            <tr>
+                                <th colspan='2'>Chứng từ</th>
+                                <th rowspan='2'>Diễn giải</th>
+                                <th colspan='2'>Số tiền</th>
+                            </tr>
+                            <tr><th>Số hiệu</th><th>Ngày, tháng</th><th>Thu/Gửi vào</th><th>Chi/Rút ra</th></tr>
+                            <tr><th class='font-normal'>A</th><th class='font-normal'>B</th><th class='font-normal'>C</th><th class='font-normal'>1</th><th class='font-normal'>2</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr class='font-bold bg-slate-100'><td colspan='5'>I. Tiền mặt</td></tr>
+                            <tr><td></td><td></td><td>Tiền mặt đầu kỳ</td><td class='text-right'>50.000.000</td><td></td></tr>
+                            <tr><td>PT01</td><td>08/01</td><td>Thu tiền bán hàng</td><td class='text-right'>20.000.000</td><td></td></tr>
+                            <tr><td>PC01</td><td>09/01</td><td>Chi trả tiền nhà cung cấp</td><td></td><td class='text-right'>30.000.000</td></tr>
+                            <tr class='font-bold bg-slate-50'><td colspan='3'>Tổng tiền thu vào trong kỳ</td><td class='text-right'>20.000.000</td><td></td></tr>
+                            <tr class='font-bold bg-slate-50'><td colspan='3'>Tổng tiền chi ra trong kỳ</td><td></td><td class='text-right'>30.000.000</td></tr>
+                            <tr class='font-bold bg-slate-50'><td colspan='3'>Tiền mặt tồn cuối kỳ</td><td class='text-right'>40.000.000</td><td></td></tr>
+
+                            <tr class='font-bold bg-slate-100'><td colspan='5'>II. Tiền gửi không kỳ hạn</td></tr>
+                            <tr><td></td><td></td><td><b>Ngân hàng: Vietcombank</b></td><td></td><td></td></tr>
+                            <tr><td></td><td></td><td>Tiền gửi đầu kỳ</td><td class='text-right'>200.000.000</td><td></td></tr>
+                            <tr><td>GBC01</td><td>15/01</td><td>Khách hàng C chuyển khoản</td><td class='text-right'>50.000.000</td><td></td></tr>
+                            <tr><td>UNC01</td><td>20/01</td><td>Ủy nhiệm chi trả lương</td><td></td><td class='text-right'>45.000.000</td></tr>
+                            <tr class='font-bold bg-slate-50'><td colspan='3'>Tổng gửi vào trong kỳ</td><td class='text-right'>50.000.000</td><td></td></tr>
+                            <tr class='font-bold bg-slate-50'><td colspan='3'>Tổng tiền rút ra trong kỳ</td><td></td><td class='text-right'>45.000.000</td></tr>
+                            <tr class='font-bold bg-slate-50'><td colspan='3'>Tiền gửi cuối kỳ</td><td class='text-right'>205.000.000</td><td></td></tr>
+                        </tbody>
+                    </table>`
+            },
+            "S3a-HKD": {
+                title: "Sổ S3a-HKD: Sổ chi tiết các loại thuế khác",
+                when: "HKD có phát sinh các loại thuế như TTĐB, tài nguyên, BVMT...",
+                period: "Ghi chép khi phát sinh nghiệp vụ và để tổng hợp tờ khai.",
+                table: `
+                    <div class='p-4 text-center text-sm text-slate-600'><p><b>Mẫu số S3a-HKD</b></p></div>
+                    <table class='w-full example-table text-[9px]'>
+                        <thead>
+                            <tr>
+                                <th rowspan='3'>Ngày tháng ghi sổ</th>
+                                <th rowspan='3'>Diễn giải</th>
+                                <th rowspan='3'>Lượng hàng hóa, dịch vụ chịu thuế</th>
+                                <th rowspan='3'>Mức thuế tuyệt đối</th>
+                                <th rowspan='3'>Giá tính thuế/01 đơn vị</th>
+                                <th rowspan='3'>Thuế suất</th>
+                                <th colspan='5'>Các loại thuế khác</th>
+                            </tr>
+                            <tr>
+                                <th colspan='3'>Thuế xuất khẩu, thuế nhập khẩu, thuế tiêu thụ đặc biệt</th>
+                                <th rowspan='2'>Thuế bảo vệ môi trường</th>
+                                <th rowspan='2'>Thuế tài nguyên</th>
+                            </tr>
+                            <tr>
+                                <th>Áp dụng PP tính thuế theo tỷ lệ %</th>
+                                <th>Áp dụng PP tính thuế tuyệt đối</th>
+                                <th>Số thuế phải nộp</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>20/01</td>
+                                <td>Khai thác nước ngầm</td>
+                                <td class='text-center'>100 m³</td>
+                                <td></td>
+                                <td class='text-right'>8.000</td>
+                                <td class='text-center'>15%</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class='text-right'>1.200.000</td>
+                            </tr>
+                            <tr>
+                                <td>22/01</td>
+                                <td>Bán rượu trên 20 độ</td>
+                                <td class='text-center'>50 chai</td>
+                                <td></td>
+                                <td class='text-right'>150.000</td>
+                                <td class='text-center'>65%</td>
+                                <td class='text-right'>4.875.000</td>
+                                <td></td>
+                                <td></td>
+                                <td class='text-right'>4.875.000</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                             <tr class='font-bold bg-slate-50'><td colspan='2'>Tổng cộng</td><td></td><td></td><td></td><td></td><td class='text-right'>4.875.000</td><td></td><td class='text-right'>4.875.000</td><td></td><td class='text-right'>1.200.000</td></tr>
+                        </tbody>
+                    </table>`
+            }
+        };
+
+        function renderTinhHuong() {
+            const container = document.getElementById('tinh-huong-container');
+            if (!container || typeof tinhHuongData === 'undefined') return;
+            
+            container.innerHTML = tinhHuongData.du_lieu.map(item => `
+                <button onclick="openModal('TH${String(item.stt).padStart(2, '0')}')" class="text-left p-5 bg-white border border-slate-200 rounded-2xl hover:border-amber-500 hover:shadow-lg transition-all group">
+                    <p class="text-[10px] font-black text-amber-500 uppercase mb-1">Tình huống ${String(item.stt).padStart(2, '0')}</p>
+                    <p class="text-sm font-bold text-slate-700 group-hover:text-amber-600">${item.tieu_de.replace(/\[.*?\]\s*/, '')}</p>
+                </button>
+            `).join('');
+        }
+
+        function openModal(id) {
+            let data;
+            
+            if (id.startsWith('TH')) {
+                const stt = parseInt(id.replace('TH', ''));
+                const item = tinhHuongData.du_lieu.find(d => d.stt === stt);
+                if (!item) return;
+                
+                data = {
+                    title: `Tình huống ${String(item.stt).padStart(2, '0')}: ${item.nhom}`,
+                    type: 'situation',
+                    question: item.tinh_huong,
+                    answer: `
+                        <p class="mb-3"><b>Lưu ý:</b> ${item.luu_y}</p>
+                        <p class="mb-3"><b>Thủ tục:</b> ${item.thu_tuc}</p>
+                        <p><b>Biểu mẫu:</b> ${item.bieu_mau}</p>
+                    `
+                };
+            } else {
+                data = details[id];
+            }
+            
+            if (!data) return;
+
+            document.getElementById('modal-title').innerText = data.title;
+            
+            // Reset all visibility
+            document.getElementById('modal-info').classList.add('hidden');
+            document.getElementById('modal-content-body').classList.add('hidden');
+            document.getElementById('modal-situation').classList.add('hidden');
+            document.getElementById('modal-table-label').classList.add('hidden');
+            document.getElementById('modal-table').classList.add('hidden');
+
+            if (data.type === 'situation') {
+                document.getElementById('modal-situation').classList.remove('hidden');
+                document.getElementById('modal-content-body').classList.remove('hidden');
+                
+                document.getElementById('situation-q').innerText = data.question;
+                document.getElementById('situation-a').innerHTML = data.answer;
+                document.getElementById('modal-header').className = 'p-8 bg-amber-600 text-white flex justify-between items-center';
+            } else {
+                // For books and tax forms
+                document.getElementById('modal-info').classList.remove('hidden');
+                document.getElementById('modal-when').innerText = data.when;
+                document.getElementById('modal-period').innerText = data.period;
+                document.getElementById('modal-header').className = 'p-8 bg-blue-700 text-white flex justify-between items-center';
+
+                // Show table only for books ('Sổ')
+                if (id.startsWith('S') || id === '01/TKN-CNKD' || id === '01/CNKD' || id === '02/QTT-TNCN') {
+                    document.getElementById('modal-content-body').classList.remove('hidden');
+                    document.getElementById('modal-table-label').classList.remove('hidden');
+                    document.getElementById('modal-table').classList.remove('hidden');
+                    document.getElementById('modal-table').innerHTML = data.table;
+                }
+            }
+
+            const modal = document.getElementById('modal');
+            const content = document.getElementById('modal-content');
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            content.classList.remove('scale-95');
+            document.body.classList.add('modal-active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            const content = document.getElementById('modal-content');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            content.classList.add('scale-95');
+            document.body.classList.remove('modal-active');
+        }
+
+        window.onload = renderTinhHuong;
+    </script>
+</body>
+</html>
