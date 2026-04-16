@@ -87,36 +87,24 @@
                         <div class="flex items-start justify-between gap-4">
                             <div>
                                 <p class="text-[10px] font-black text-blue-700 uppercase tracking-widest">Thông báo</p>
-                                <p class="text-sm font-bold text-slate-800 mt-1">Doanh thu đạt mức Nhóm 2: cần chọn phương pháp tính thuế</p>
+                                <p class="text-sm font-bold text-slate-800 mt-1">Chọn phương pháp tính thuế</p>
                                 <p id="group2-method-hint" class="text-xs text-slate-600 mt-1"></p>
                             </div>
                             <div class="shrink-0 flex flex-col items-end gap-2">
                                 <span id="group2-method-badge" class="px-3 py-1 rounded-full bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest"></span>
-                                <button onclick="openModal('NHOM2_CHON_PP')" class="px-4 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-[10px] font-black uppercase tracking-widest transition-colors">Chọn phương pháp</button>
+                                <button onclick="openModal('NHOM2_CHON_PP')" class="px-4 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-[10px] font-black uppercase tracking-widest transition-colors">Chi tiết</button>
                             </div>
                         </div>
-                        <div class="mt-4 space-y-2">
-                            <button id="group2-option-doanh_thu" onclick="setNhom2Method('doanh_thu')" class="w-full text-left p-4 rounded-2xl border transition-all">
-                                <div class="flex items-start justify-between gap-4">
-                                    <div>
-                                        <p class="text-[10px] font-black text-blue-700 uppercase tracking-widest">Phương pháp 1</p>
-                                        <p class="text-sm font-black text-slate-900 mt-1">Tính trực tiếp trên doanh thu</p>
-                                        <p class="text-xs text-slate-600 mt-1">(Doanh thu – 500 triệu) x Tỷ lệ % theo nhóm ngành nghề</p>
-                                        <p class="text-xs font-bold text-slate-800 mt-2">Hiện sổ: S2a, S3a</p>
-                                    </div>
-                                    <span id="group2-option-doanh_thu-mark" class="hidden shrink-0 px-3 py-1 rounded-full bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest">Đang chọn</span>
-                                </div>
+                        <div class="mt-4 grid grid-cols-2 gap-2">
+                            <button id="group2-toggle-doanh_thu" onclick="setNhom2Method('doanh_thu')" class="px-3 py-3 rounded-2xl border text-left transition-all">
+                                <p class="text-[10px] font-black text-blue-700 uppercase tracking-widest">PP1</p>
+                                <p class="text-xs font-black text-slate-900 mt-0.5">Doanh thu</p>
+                                <p class="text-[11px] text-slate-600 mt-1">DT-500tr x % ngành</p>
                             </button>
-                            <button id="group2-option-thu_nhap" onclick="setNhom2Method('thu_nhap')" class="w-full text-left p-4 rounded-2xl border transition-all">
-                                <div class="flex items-start justify-between gap-4">
-                                    <div>
-                                        <p class="text-[10px] font-black text-emerald-700 uppercase tracking-widest">Phương pháp 2</p>
-                                        <p class="text-sm font-black text-slate-900 mt-1">Tính trực tiếp trên thu nhập tính thuế</p>
-                                        <p class="text-xs text-slate-600 mt-1">(Doanh thu – chi phí) x thuế suất 15%</p>
-                                        <p class="text-xs font-bold text-slate-800 mt-2">Hiện sổ: S2b, S2c, S2d, S2e, S3a</p>
-                                    </div>
-                                    <span id="group2-option-thu_nhap-mark" class="hidden shrink-0 px-3 py-1 rounded-full bg-emerald-600 text-white text-[10px] font-black uppercase tracking-widest">Đang chọn</span>
-                                </div>
+                            <button id="group2-toggle-thu_nhap" onclick="setNhom2Method('thu_nhap')" class="px-3 py-3 rounded-2xl border text-left transition-all">
+                                <p class="text-[10px] font-black text-emerald-700 uppercase tracking-widest">PP2</p>
+                                <p class="text-xs font-black text-slate-900 mt-0.5">Thu nhập</p>
+                                <p class="text-[11px] text-slate-600 mt-1">(DT-CP) x 15%</p>
                             </button>
                         </div>
                     </section>
@@ -724,10 +712,8 @@
             const badgeEl = document.getElementById('group2-method-badge');
             const hintEl = document.getElementById('group2-method-hint');
             const booksEl = document.getElementById('group2-books');
-            const optionDoanhThuEl = document.getElementById('group2-option-doanh_thu');
-            const optionThuNhapEl = document.getElementById('group2-option-thu_nhap');
-            const optionDoanhThuMarkEl = document.getElementById('group2-option-doanh_thu-mark');
-            const optionThuNhapMarkEl = document.getElementById('group2-option-thu_nhap-mark');
+            const toggleDoanhThuEl = document.getElementById('group2-toggle-doanh_thu');
+            const toggleThuNhapEl = document.getElementById('group2-toggle-thu_nhap');
 
             if (descEl) {
                 descEl.innerText = method === 'doanh_thu'
@@ -741,31 +727,27 @@
 
             if (hintEl) {
                 hintEl.innerText = method === 'doanh_thu'
-                    ? "Đang chọn PP1: (Doanh thu – 500 triệu) x Tỷ lệ % theo nhóm ngành nghề."
-                    : "Đang chọn PP2: (Doanh thu – chi phí) x thuế suất 15%.";
+                    ? "PP1: (Doanh thu – 500 triệu) x Tỷ lệ % theo nhóm ngành nghề."
+                    : "PP2: (Doanh thu – chi phí) x thuế suất 15%.";
             }
 
-            const baseOptionClasses = ['border-slate-200', 'bg-white', 'hover:bg-slate-50'];
-            const selectedDoanhThuClasses = ['border-blue-600', 'bg-blue-50', 'ring-2', 'ring-blue-200'];
-            const selectedThuNhapClasses = ['border-emerald-600', 'bg-emerald-50', 'ring-2', 'ring-emerald-200'];
+            const baseToggleClasses = ['border-slate-200', 'bg-white', 'hover:bg-slate-50'];
+            const selectedDoanhThuToggleClasses = ['border-blue-600', 'bg-blue-50', 'ring-2', 'ring-blue-200'];
+            const selectedThuNhapToggleClasses = ['border-emerald-600', 'bg-emerald-50', 'ring-2', 'ring-emerald-200'];
 
-            if (optionDoanhThuEl && optionThuNhapEl) {
-                optionDoanhThuEl.classList.remove(...selectedDoanhThuClasses, ...baseOptionClasses, ...selectedThuNhapClasses);
-                optionThuNhapEl.classList.remove(...selectedDoanhThuClasses, ...baseOptionClasses, ...selectedThuNhapClasses);
+            if (toggleDoanhThuEl && toggleThuNhapEl) {
+                toggleDoanhThuEl.classList.remove(...baseToggleClasses, ...selectedDoanhThuToggleClasses, ...selectedThuNhapToggleClasses);
+                toggleThuNhapEl.classList.remove(...baseToggleClasses, ...selectedDoanhThuToggleClasses, ...selectedThuNhapToggleClasses);
 
-                optionDoanhThuEl.classList.add(...baseOptionClasses);
-                optionThuNhapEl.classList.add(...baseOptionClasses);
+                toggleDoanhThuEl.classList.add(...baseToggleClasses);
+                toggleThuNhapEl.classList.add(...baseToggleClasses);
 
                 if (method === 'doanh_thu') {
-                    optionDoanhThuEl.classList.remove(...baseOptionClasses);
-                    optionDoanhThuEl.classList.add(...selectedDoanhThuClasses);
-                    if (optionDoanhThuMarkEl) optionDoanhThuMarkEl.classList.remove('hidden');
-                    if (optionThuNhapMarkEl) optionThuNhapMarkEl.classList.add('hidden');
+                    toggleDoanhThuEl.classList.remove(...baseToggleClasses);
+                    toggleDoanhThuEl.classList.add(...selectedDoanhThuToggleClasses);
                 } else {
-                    optionThuNhapEl.classList.remove(...baseOptionClasses);
-                    optionThuNhapEl.classList.add(...selectedThuNhapClasses);
-                    if (optionThuNhapMarkEl) optionThuNhapMarkEl.classList.remove('hidden');
-                    if (optionDoanhThuMarkEl) optionDoanhThuMarkEl.classList.add('hidden');
+                    toggleThuNhapEl.classList.remove(...baseToggleClasses);
+                    toggleThuNhapEl.classList.add(...selectedThuNhapToggleClasses);
                 }
             }
 
@@ -773,21 +755,21 @@
 
             if (method === 'doanh_thu') {
                 booksEl.innerHTML = `
-                    <div class="grid grid-cols-2 gap-3">
-                        <button onclick="openModal('S2a-HKD')" class="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 font-bold text-xs border border-slate-200 transition-all">S2a-HKD (Doanh thu)</button>
-                        <button onclick="openModal('S3a-HKD')" class="p-3 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs border border-indigo-100 col-span-2 transition-all">S3a-HKD (Thuế khác)</button>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="openModal('S2a-HKD')" class="px-4 py-2 rounded-full bg-slate-50 hover:bg-slate-100 font-black text-[11px] border border-slate-200 transition-all">S2a</button>
+                        <button onclick="openModal('S3a-HKD')" class="px-4 py-2 rounded-full bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-black text-[11px] border border-indigo-100 transition-all">S3a</button>
                     </div>
                 `;
                 return;
             }
 
             booksEl.innerHTML = `
-                <div class="grid grid-cols-4 gap-2 text-[10px] font-bold text-center text-slate-700">
-                    <button onclick="openModal('S2b-HKD')" class="bg-slate-50 border border-slate-200 p-2 rounded hover:bg-slate-100">S2b</button>
-                    <button onclick="openModal('S2c-HKD')" class="bg-rose-50 border border-rose-200 p-2 rounded hover:bg-rose-100 text-rose-700">S2c</button>
-                    <button onclick="openModal('S2d-HKD')" class="bg-slate-50 border border-slate-200 p-2 rounded hover:bg-slate-100">S2d</button>
-                    <button onclick="openModal('S2e-HKD')" class="bg-slate-50 border border-slate-200 p-2 rounded hover:bg-slate-100">S2e</button>
-                    <button onclick="openModal('S3a-HKD')" class="bg-indigo-50 border border-indigo-200 p-2 rounded hover:bg-indigo-100 text-indigo-700 col-span-4">S3a (Thuế khác)</button>
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="openModal('S2b-HKD')" class="px-4 py-2 rounded-full bg-slate-50 hover:bg-slate-100 font-black text-[11px] border border-slate-200 transition-all">S2b</button>
+                    <button onclick="openModal('S2c-HKD')" class="px-4 py-2 rounded-full bg-rose-50 hover:bg-rose-100 text-rose-700 font-black text-[11px] border border-rose-200 transition-all">S2c</button>
+                    <button onclick="openModal('S2d-HKD')" class="px-4 py-2 rounded-full bg-slate-50 hover:bg-slate-100 font-black text-[11px] border border-slate-200 transition-all">S2d</button>
+                    <button onclick="openModal('S2e-HKD')" class="px-4 py-2 rounded-full bg-slate-50 hover:bg-slate-100 font-black text-[11px] border border-slate-200 transition-all">S2e</button>
+                    <button onclick="openModal('S3a-HKD')" class="px-4 py-2 rounded-full bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-black text-[11px] border border-indigo-200 transition-all">S3a</button>
                 </div>
             `;
         }
