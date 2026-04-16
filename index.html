@@ -80,21 +80,53 @@
                 <div class="bg-blue-600 p-8 border-b border-blue-700 text-white">
                     <span class="bg-white/20 text-white px-3 py-1 rounded-full font-bold text-[10px] uppercase">Nhóm 2</span>
                     <h2 class="text-2xl font-bold mt-3">DT 500tr - 3 tỷ</h2>
-                    <p class="text-blue-100 text-sm mt-2 opacity-80 italic text-wrap">Thuế tính theo Tỷ lệ % Doanh thu.</p>
+                    <p id="group2-description" class="text-blue-100 text-sm mt-2 opacity-80 italic text-wrap"></p>
                 </div>
                 <div class="p-8 space-y-8">
+                    <section class="bg-white/60 border border-blue-200 rounded-2xl p-4">
+                        <div class="flex items-start justify-between gap-4">
+                            <div>
+                                <p class="text-[10px] font-black text-blue-700 uppercase tracking-widest">Thông báo</p>
+                                <p class="text-sm font-bold text-slate-800 mt-1">Doanh thu đạt mức Nhóm 2: cần chọn phương pháp tính thuế</p>
+                                <p id="group2-method-hint" class="text-xs text-slate-600 mt-1"></p>
+                            </div>
+                            <div class="shrink-0 flex flex-col items-end gap-2">
+                                <span id="group2-method-badge" class="px-3 py-1 rounded-full bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest"></span>
+                                <button onclick="openModal('NHOM2_CHON_PP')" class="px-4 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white text-[10px] font-black uppercase tracking-widest transition-colors">Chọn phương pháp</button>
+                            </div>
+                        </div>
+                        <div class="mt-4 space-y-2">
+                            <button id="group2-option-doanh_thu" onclick="setNhom2Method('doanh_thu')" class="w-full text-left p-4 rounded-2xl border transition-all">
+                                <div class="flex items-start justify-between gap-4">
+                                    <div>
+                                        <p class="text-[10px] font-black text-blue-700 uppercase tracking-widest">Phương pháp 1</p>
+                                        <p class="text-sm font-black text-slate-900 mt-1">Tính trực tiếp trên doanh thu</p>
+                                        <p class="text-xs text-slate-600 mt-1">(Doanh thu – 500 triệu) x Tỷ lệ % theo nhóm ngành nghề</p>
+                                        <p class="text-xs font-bold text-slate-800 mt-2">Hiện sổ: S2a, S3a</p>
+                                    </div>
+                                    <span id="group2-option-doanh_thu-mark" class="hidden shrink-0 px-3 py-1 rounded-full bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest">Đang chọn</span>
+                                </div>
+                            </button>
+                            <button id="group2-option-thu_nhap" onclick="setNhom2Method('thu_nhap')" class="w-full text-left p-4 rounded-2xl border transition-all">
+                                <div class="flex items-start justify-between gap-4">
+                                    <div>
+                                        <p class="text-[10px] font-black text-emerald-700 uppercase tracking-widest">Phương pháp 2</p>
+                                        <p class="text-sm font-black text-slate-900 mt-1">Tính trực tiếp trên thu nhập tính thuế</p>
+                                        <p class="text-xs text-slate-600 mt-1">(Doanh thu – chi phí) x thuế suất 15%</p>
+                                        <p class="text-xs font-bold text-slate-800 mt-2">Hiện sổ: S2b, S2c, S2d, S2e, S3a</p>
+                                    </div>
+                                    <span id="group2-option-thu_nhap-mark" class="hidden shrink-0 px-3 py-1 rounded-full bg-emerald-600 text-white text-[10px] font-black uppercase tracking-widest">Đang chọn</span>
+                                </div>
+                            </button>
+                        </div>
+                    </section>
                     <section>
                         <h3 class="font-bold text-slate-400 text-xs uppercase tracking-widest mb-4 flex items-center"><i class="fa-solid fa-file-invoice-dollar text-blue-500 mr-2"></i>Biểu mẫu thuế</h3>
                         <button onclick="openModal('01/CNKD')" class="w-full text-left p-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold shadow-lg transition-all">01/CNKD: Tờ khai Thuế Quý</button>
                     </section>
                     <section>
                         <h3 class="font-bold text-slate-400 text-xs uppercase tracking-widest mb-4 flex items-center"><i class="fa-solid fa-table-list text-emerald-500 mr-2"></i>Hệ thống sổ kế toán</h3>
-                        <div class="grid grid-cols-2 gap-3">
-                            <button onclick="openModal('S2a-HKD')" class="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 font-bold text-xs border border-slate-200 transition-all">S2a-HKD (Doanh thu)</button>
-                            <button onclick="openModal('S2d-HKD')" class="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 font-bold text-xs border border-slate-200 transition-all">S2d-HKD (Tồn kho)</button>
-                            <button onclick="openModal('S2e-HKD')" class="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 font-bold text-xs border border-slate-200 transition-all">S2e-HKD (Tiền)</button>
-                            <button onclick="openModal('S3a-HKD')" class="p-3 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs border border-indigo-100 col-span-2 transition-all">S3a-HKD (Thuế khác)</button>
-                        </div>
+                        <div id="group2-books"></div>
                     </section>
                 </div>
             </div>
@@ -557,6 +589,36 @@
                              <tr class='font-bold bg-slate-50'><td colspan='2'>Tổng cộng</td><td></td><td></td><td></td><td></td><td class='text-right'>4.875.000</td><td></td><td class='text-right'>4.875.000</td><td></td><td class='text-right'>1.200.000</td></tr>
                         </tbody>
                     </table>`
+            },
+            "NHOM2_CHON_PP": {
+                title: "Nhóm 2 (500tr - 3 tỷ): Chọn phương pháp tính thuế",
+                when: "Áp dụng khi Doanh thu năm > 500 triệu và ≤ 3 tỷ.",
+                period: "Chọn phương pháp để hiển thị hệ thống sổ phù hợp.",
+                table: `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button onclick="setNhom2Method('doanh_thu')" class="text-left p-6 rounded-3xl border border-blue-200 bg-blue-50 hover:bg-blue-100 transition-all">
+                            <p class="text-[10px] font-black text-blue-700 uppercase tracking-widest">Phương pháp 1</p>
+                            <p class="text-base font-black text-slate-900 mt-1">Tính trực tiếp trên doanh thu</p>
+                            <p class="text-sm text-slate-700 mt-2 font-bold">= (Doanh thu – 500 triệu) x Tỷ lệ % theo nhóm ngành nghề</p>
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                <span class="px-3 py-1 rounded-full bg-white border border-blue-200 text-[10px] font-black text-blue-700 uppercase tracking-widest">S2a</span>
+                                <span class="px-3 py-1 rounded-full bg-white border border-blue-200 text-[10px] font-black text-blue-700 uppercase tracking-widest">S3a</span>
+                            </div>
+                        </button>
+                        <button onclick="setNhom2Method('thu_nhap')" class="text-left p-6 rounded-3xl border border-emerald-200 bg-emerald-50 hover:bg-emerald-100 transition-all">
+                            <p class="text-[10px] font-black text-emerald-700 uppercase tracking-widest">Phương pháp 2</p>
+                            <p class="text-base font-black text-slate-900 mt-1">Tính trực tiếp trên thu nhập tính thuế</p>
+                            <p class="text-sm text-slate-700 mt-2 font-bold">= (Doanh thu – chi phí) x thuế suất 15%</p>
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                <span class="px-3 py-1 rounded-full bg-white border border-emerald-200 text-[10px] font-black text-emerald-700 uppercase tracking-widest">S2b</span>
+                                <span class="px-3 py-1 rounded-full bg-white border border-emerald-200 text-[10px] font-black text-emerald-700 uppercase tracking-widest">S2c</span>
+                                <span class="px-3 py-1 rounded-full bg-white border border-emerald-200 text-[10px] font-black text-emerald-700 uppercase tracking-widest">S2d</span>
+                                <span class="px-3 py-1 rounded-full bg-white border border-emerald-200 text-[10px] font-black text-emerald-700 uppercase tracking-widest">S2e</span>
+                                <span class="px-3 py-1 rounded-full bg-white border border-emerald-200 text-[10px] font-black text-emerald-700 uppercase tracking-widest">S3a</span>
+                            </div>
+                        </button>
+                    </div>
+                `
             }
         };
 
@@ -619,8 +681,8 @@
                 document.getElementById('modal-period').innerText = data.period;
                 document.getElementById('modal-header').className = 'p-8 bg-blue-700 text-white flex justify-between items-center';
 
-                // Show table only for books ('Sổ')
-                if (id.startsWith('S') || id === '01/TKN-CNKD' || id === '01/CNKD' || id === '02/QTT-TNCN') {
+                const hasTable = typeof data.table === 'string' && data.table.trim().length > 0;
+                if (hasTable) {
                     document.getElementById('modal-content-body').classList.remove('hidden');
                     document.getElementById('modal-table-label').classList.remove('hidden');
                     document.getElementById('modal-table').classList.remove('hidden');
@@ -643,7 +705,97 @@
             document.body.classList.remove('modal-active');
         }
 
-        window.onload = renderTinhHuong;
+        function getNhom2Method() {
+            const saved = localStorage.getItem('nhom2_method');
+            if (saved === 'doanh_thu' || saved === 'thu_nhap') return saved;
+            return 'doanh_thu';
+        }
+
+        function setNhom2Method(method) {
+            if (method !== 'doanh_thu' && method !== 'thu_nhap') return;
+            localStorage.setItem('nhom2_method', method);
+            renderNhom2UI();
+            closeModal();
+        }
+
+        function renderNhom2UI() {
+            const method = getNhom2Method();
+            const descEl = document.getElementById('group2-description');
+            const badgeEl = document.getElementById('group2-method-badge');
+            const hintEl = document.getElementById('group2-method-hint');
+            const booksEl = document.getElementById('group2-books');
+            const optionDoanhThuEl = document.getElementById('group2-option-doanh_thu');
+            const optionThuNhapEl = document.getElementById('group2-option-thu_nhap');
+            const optionDoanhThuMarkEl = document.getElementById('group2-option-doanh_thu-mark');
+            const optionThuNhapMarkEl = document.getElementById('group2-option-thu_nhap-mark');
+
+            if (descEl) {
+                descEl.innerText = method === 'doanh_thu'
+                    ? "Thuế tính theo Doanh thu vượt 500 triệu (theo Tỷ lệ % nhóm ngành nghề)."
+                    : "Thuế tính theo Thu nhập tính thuế (Doanh thu – chi phí) x 15%.";
+            }
+
+            if (badgeEl) {
+                badgeEl.innerText = method === 'doanh_thu' ? "PP 1: Doanh thu" : "PP 2: Thu nhập";
+            }
+
+            if (hintEl) {
+                hintEl.innerText = method === 'doanh_thu'
+                    ? "Đang chọn PP1: (Doanh thu – 500 triệu) x Tỷ lệ % theo nhóm ngành nghề."
+                    : "Đang chọn PP2: (Doanh thu – chi phí) x thuế suất 15%.";
+            }
+
+            const baseOptionClasses = ['border-slate-200', 'bg-white', 'hover:bg-slate-50'];
+            const selectedDoanhThuClasses = ['border-blue-600', 'bg-blue-50', 'ring-2', 'ring-blue-200'];
+            const selectedThuNhapClasses = ['border-emerald-600', 'bg-emerald-50', 'ring-2', 'ring-emerald-200'];
+
+            if (optionDoanhThuEl && optionThuNhapEl) {
+                optionDoanhThuEl.classList.remove(...selectedDoanhThuClasses, ...baseOptionClasses, ...selectedThuNhapClasses);
+                optionThuNhapEl.classList.remove(...selectedDoanhThuClasses, ...baseOptionClasses, ...selectedThuNhapClasses);
+
+                optionDoanhThuEl.classList.add(...baseOptionClasses);
+                optionThuNhapEl.classList.add(...baseOptionClasses);
+
+                if (method === 'doanh_thu') {
+                    optionDoanhThuEl.classList.remove(...baseOptionClasses);
+                    optionDoanhThuEl.classList.add(...selectedDoanhThuClasses);
+                    if (optionDoanhThuMarkEl) optionDoanhThuMarkEl.classList.remove('hidden');
+                    if (optionThuNhapMarkEl) optionThuNhapMarkEl.classList.add('hidden');
+                } else {
+                    optionThuNhapEl.classList.remove(...baseOptionClasses);
+                    optionThuNhapEl.classList.add(...selectedThuNhapClasses);
+                    if (optionThuNhapMarkEl) optionThuNhapMarkEl.classList.remove('hidden');
+                    if (optionDoanhThuMarkEl) optionDoanhThuMarkEl.classList.add('hidden');
+                }
+            }
+
+            if (!booksEl) return;
+
+            if (method === 'doanh_thu') {
+                booksEl.innerHTML = `
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="openModal('S2a-HKD')" class="p-3 rounded-xl bg-slate-50 hover:bg-slate-100 font-bold text-xs border border-slate-200 transition-all">S2a-HKD (Doanh thu)</button>
+                        <button onclick="openModal('S3a-HKD')" class="p-3 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs border border-indigo-100 col-span-2 transition-all">S3a-HKD (Thuế khác)</button>
+                    </div>
+                `;
+                return;
+            }
+
+            booksEl.innerHTML = `
+                <div class="grid grid-cols-4 gap-2 text-[10px] font-bold text-center text-slate-700">
+                    <button onclick="openModal('S2b-HKD')" class="bg-slate-50 border border-slate-200 p-2 rounded hover:bg-slate-100">S2b</button>
+                    <button onclick="openModal('S2c-HKD')" class="bg-rose-50 border border-rose-200 p-2 rounded hover:bg-rose-100 text-rose-700">S2c</button>
+                    <button onclick="openModal('S2d-HKD')" class="bg-slate-50 border border-slate-200 p-2 rounded hover:bg-slate-100">S2d</button>
+                    <button onclick="openModal('S2e-HKD')" class="bg-slate-50 border border-slate-200 p-2 rounded hover:bg-slate-100">S2e</button>
+                    <button onclick="openModal('S3a-HKD')" class="bg-indigo-50 border border-indigo-200 p-2 rounded hover:bg-indigo-100 text-indigo-700 col-span-4">S3a (Thuế khác)</button>
+                </div>
+            `;
+        }
+
+        window.onload = () => {
+            renderTinhHuong();
+            renderNhom2UI();
+        };
     </script>
 </body>
 </html>
