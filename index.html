@@ -50,6 +50,98 @@
                 </a>
             </div>
         </div>
+        <div class="mb-8 bg-white rounded-3xl border border-slate-200 shadow-sm p-6">
+            <div class="flex items-start justify-between gap-4">
+                <div>
+                    <p class="text-xs font-black text-slate-400 uppercase tracking-widest">Thiết lập</p>
+                    <div class="flex items-center gap-3 mt-1">
+                        <p class="text-base font-black text-slate-800">Ngành nghề kinh doanh </p>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-1">Chọn ngành nghề chính phù hợp với hoạt động kinh doanh.</p>
+                </div>
+              
+            </div>
+            <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <button id="group2-industry-hang_hoa" onclick="setNhom2Industry('hang_hoa')" class="w-full text-left p-4 rounded-2xl border transition-all flex items-start gap-4 relative">
+                    <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 shrink-0">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-black text-slate-800">Phân phối hàng hóa</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Phân phối, cung cấp hàng hóa</p>
+                        <p class="text-[11px] font-bold text-slate-700 mt-1">GTGT 1% | TNCN 0.5%</p>
+                    </div>
+                    <span id="group2-industry-mark-hang_hoa" class="hidden absolute top-3 right-3 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center">
+                        <i class="fa-solid fa-check text-[10px]"></i>
+                    </span>
+                </button>
+                <button id="group2-industry-dich_vu" onclick="setNhom2Industry('dich_vu')" class="w-full text-left p-4 rounded-2xl border transition-all flex items-start gap-4 relative">
+                    <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 shrink-0">
+                        <i class="fa-solid fa-helmet-safety"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-black text-slate-800">Dịch vụ / Xây dựng</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Dịch vụ, xây dựng không bao thầu NVL</p>
+                        <p class="text-[11px] font-bold text-slate-700 mt-1">GTGT 5% | TNCN 2%</p>
+                    </div>
+                    <span id="group2-industry-mark-dich_vu" class="hidden absolute top-3 right-3 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center">
+                        <i class="fa-solid fa-check text-[10px]"></i>
+                    </span>
+                </button>
+                <button id="group2-industry-cho_thue_tai_san" onclick="setNhom2Industry('cho_thue_tai_san')" class="w-full text-left p-4 rounded-2xl border transition-all flex items-start gap-4 relative">
+                    <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 shrink-0">
+                        <i class="fa-solid fa-key"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-black text-slate-800">Cho thuê tài sản</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Cho thuê tài sản; đại lý bảo hiểm/xổ số/bán hàng đa cấp</p>
+                        <p class="text-[11px] font-bold text-slate-700 mt-1">GTGT 5% | TNCN 5%</p>
+                    </div>
+                    <span id="group2-industry-mark-cho_thue_tai_san" class="hidden absolute top-3 right-3 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center">
+                        <i class="fa-solid fa-check text-[10px]"></i>
+                    </span>
+                </button>
+                <button id="group2-industry-san_xuat_van_tai" onclick="setNhom2Industry('san_xuat_van_tai')" class="w-full text-left p-4 rounded-2xl border transition-all flex items-start gap-4 relative">
+                    <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 shrink-0">
+                        <i class="fa-solid fa-industry"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-black text-slate-800">Sản xuất & Vận tải</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Sản xuất, vận tải; xây dựng có bao thầu NVL</p>
+                        <p class="text-[11px] font-bold text-slate-700 mt-1">GTGT 3% | TNCN 1.5%</p>
+                    </div>
+                    <span id="group2-industry-mark-san_xuat_van_tai" class="hidden absolute top-3 right-3 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center">
+                        <i class="fa-solid fa-check text-[10px]"></i>
+                    </span>
+                </button>
+                <button id="group2-industry-noi_dung_so" onclick="setNhom2Industry('noi_dung_so')" class="w-full text-left p-4 rounded-2xl border transition-all flex items-start gap-4 relative">
+                    <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 shrink-0">
+                        <i class="fa-solid fa-laptop-code"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-black text-slate-800">Nội dung số</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Sản phẩm nội dung, dịch vụ số</p>
+                        <p class="text-[11px] font-bold text-slate-700 mt-1">GTGT 5% | TNCN 2%</p>
+                    </div>
+                    <span id="group2-industry-mark-noi_dung_so" class="hidden absolute top-3 right-3 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center">
+                        <i class="fa-solid fa-check text-[10px]"></i>
+                    </span>
+                </button>
+                <button id="group2-industry-khac" onclick="setNhom2Industry('khac')" class="w-full text-left p-4 rounded-2xl border transition-all flex items-start gap-4 relative">
+                    <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 shrink-0">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
+                    <div>
+                        <p class="text-sm font-black text-slate-800">Kinh doanh khác</p>
+                        <p class="text-xs text-slate-500 mt-0.5">Hoạt động kinh doanh khác</p>
+                        <p class="text-[11px] font-bold text-slate-700 mt-1">GTGT 2% | TNCN 1%</p>
+                    </div>
+                    <span id="group2-industry-mark-khac" class="hidden absolute top-3 right-3 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center">
+                        <i class="fa-solid fa-check text-[10px]"></i>
+                    </span>
+                </button>
+            </div>
+        </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300">
                 <div class="bg-slate-50 p-8 border-b border-slate-100">
@@ -699,6 +791,27 @@
             return 'doanh_thu';
         }
 
+        const nhom2IndustryRates = {
+            hang_hoa: { label: "Phân phối, cung cấp hàng hóa", vat: 1, pit: 0.5 },
+            dich_vu: { label: "Dịch vụ, xây dựng không bao thầu NVL", vat: 5, pit: 2 },
+            cho_thue_tai_san: { label: "Cho thuê tài sản", vat: 5, pit: 5 },
+            san_xuat_van_tai: { label: "Sản xuất, vận tải, dịch vụ gắn với hàng hóa; xây dựng có bao thầu NVL", vat: 3, pit: 1.5 },
+            noi_dung_so: { label: "Nội dung số", vat: 5, pit: 2 },
+            khac: { label: "Hoạt động kinh doanh khác", vat: 2, pit: 1 }
+        };
+
+        function getNhom2Industry() {
+            const saved = localStorage.getItem('nhom2_industry');
+            if (saved && nhom2IndustryRates[saved]) return saved;
+            return 'hang_hoa';
+        }
+
+        function setNhom2Industry(industryKey) {
+            if (!nhom2IndustryRates[industryKey]) return;
+            localStorage.setItem('nhom2_industry', industryKey);
+            renderNhom2UI();
+        }
+
         function setNhom2Method(method) {
             if (method !== 'doanh_thu' && method !== 'thu_nhap') return;
             localStorage.setItem('nhom2_method', method);
@@ -708,12 +821,16 @@
 
         function renderNhom2UI() {
             const method = getNhom2Method();
+            const industryKey = getNhom2Industry();
+            const industry = nhom2IndustryRates[industryKey] || nhom2IndustryRates.hang_hoa;
             const descEl = document.getElementById('group2-description');
             const badgeEl = document.getElementById('group2-method-badge');
             const hintEl = document.getElementById('group2-method-hint');
             const booksEl = document.getElementById('group2-books');
             const toggleDoanhThuEl = document.getElementById('group2-toggle-doanh_thu');
             const toggleThuNhapEl = document.getElementById('group2-toggle-thu_nhap');
+            const vatRateEl = document.getElementById('group2-vat-rate');
+            const pitRateEl = document.getElementById('group2-pit-rate');
 
             if (descEl) {
                 descEl.innerText = method === 'doanh_thu'
@@ -730,6 +847,29 @@
                     ? "PP1: (Doanh thu – 500 triệu) x Tỷ lệ % theo nhóm ngành nghề."
                     : "PP2: (Doanh thu – chi phí) x thuế suất 15%.";
             }
+
+            if (vatRateEl) {
+                vatRateEl.innerText = `${industry.vat}%`;
+            }
+            if (pitRateEl) {
+                pitRateEl.innerText = method === 'doanh_thu' ? `${industry.pit}%` : `15%`;
+            }
+
+            const industryBaseClasses = ['border-slate-200', 'bg-white', 'hover:bg-slate-50'];
+            const industrySelectedClasses = ['border-emerald-600', 'bg-emerald-50', 'ring-2', 'ring-emerald-200'];
+            Object.keys(nhom2IndustryRates).forEach(key => {
+                const cardEl = document.getElementById(`group2-industry-${key}`);
+                const markEl = document.getElementById(`group2-industry-mark-${key}`);
+                if (!cardEl) return;
+                cardEl.classList.remove(...industryBaseClasses, ...industrySelectedClasses);
+                cardEl.classList.add(...industryBaseClasses);
+                if (markEl) markEl.classList.add('hidden');
+                if (key === industryKey) {
+                    cardEl.classList.remove(...industryBaseClasses);
+                    cardEl.classList.add(...industrySelectedClasses);
+                    if (markEl) markEl.classList.remove('hidden');
+                }
+            });
 
             const baseToggleClasses = ['border-slate-200', 'bg-white', 'hover:bg-slate-50'];
             const selectedDoanhThuToggleClasses = ['border-blue-600', 'bg-blue-50', 'ring-2', 'ring-blue-200'];
