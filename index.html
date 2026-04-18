@@ -23,8 +23,9 @@
 </head>
 <body class="bg-slate-50 text-slate-900">
 
-    <header class="bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white py-16 px-4 shadow-2xl">
-        <div class="max-w-6xl mx-auto text-center">
+    <header class="relative bg-gradient-to-br from-blue-700 via-blue-800 to-indigo-900 text-white pt-6 pb-16 px-4 shadow-2xl">
+       
+        <div class="max-w-6xl mx-auto text-center pt-10 md:pt-12">
             <h1 class="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">Cổng Thông Tin Thuế & Kế Toán 2026</h1>
             <p class="text-blue-100 text-lg font-light">Số hóa Nghị định 68/2026, Thông tư 152/2025 và Luật Thuế GTGT/TNCN 2024-2025</p>
         </div>
@@ -57,12 +58,12 @@
                     <div class="flex items-center gap-3 mt-1">
                         <p class="text-base font-black text-slate-800">Ngành nghề kinh doanh </p>
                     </div>
-                    <p class="text-xs text-slate-500 mt-1">Chọn ngành nghề chính phù hợp với hoạt động kinh doanh.</p>
+                    <p class="text-xs text-slate-500 mt-1">Danh mục ngành nghề (tham khảo tỷ lệ thuế).</p>
                 </div>
               
             </div>
             <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
-                <button id="group2-industry-hang_hoa" onclick="setNhom2Industry('hang_hoa')" class="w-full text-left p-4 rounded-2xl border transition-all flex items-start gap-4 relative">
+                <div class="w-full text-left p-4 rounded-2xl border border-slate-200 bg-white flex items-start gap-4">
                     <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 shrink-0">
                         <i class="fa-solid fa-boxes-stacked"></i>
                     </div>
@@ -71,11 +72,8 @@
                         <p class="text-xs text-slate-500 mt-0.5">Phân phối, cung cấp hàng hóa</p>
                         <p class="text-[11px] font-bold text-slate-700 mt-1">GTGT 1% | TNCN 0.5%</p>
                     </div>
-                    <span id="group2-industry-mark-hang_hoa" class="hidden absolute top-3 right-3 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center">
-                        <i class="fa-solid fa-check text-[10px]"></i>
-                    </span>
-                </button>
-                <button id="group2-industry-dich_vu" onclick="setNhom2Industry('dich_vu')" class="w-full text-left p-4 rounded-2xl border transition-all flex items-start gap-4 relative">
+                </div>
+                <div class="w-full text-left p-4 rounded-2xl border border-slate-200 bg-white flex items-start gap-4">
                     <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 shrink-0">
                         <i class="fa-solid fa-helmet-safety"></i>
                     </div>
@@ -84,11 +82,8 @@
                         <p class="text-xs text-slate-500 mt-0.5">Dịch vụ, xây dựng không bao thầu NVL</p>
                         <p class="text-[11px] font-bold text-slate-700 mt-1">GTGT 5% | TNCN 2%</p>
                     </div>
-                    <span id="group2-industry-mark-dich_vu" class="hidden absolute top-3 right-3 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center">
-                        <i class="fa-solid fa-check text-[10px]"></i>
-                    </span>
-                </button>
-                <button id="group2-industry-cho_thue_tai_san" onclick="setNhom2Industry('cho_thue_tai_san')" class="w-full text-left p-4 rounded-2xl border transition-all flex items-start gap-4 relative">
+                </div>
+                <div class="w-full text-left p-4 rounded-2xl border border-slate-200 bg-white flex items-start gap-4">
                     <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 shrink-0">
                         <i class="fa-solid fa-key"></i>
                     </div>
@@ -97,11 +92,8 @@
                         <p class="text-xs text-slate-500 mt-0.5">Cho thuê tài sản; đại lý bảo hiểm/xổ số/bán hàng đa cấp</p>
                         <p class="text-[11px] font-bold text-slate-700 mt-1">GTGT 0% | TNCN 5%</p>
                     </div>
-                    <span id="group2-industry-mark-cho_thue_tai_san" class="hidden absolute top-3 right-3 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center">
-                        <i class="fa-solid fa-check text-[10px]"></i>
-                    </span>
-                </button>
-                <button id="group2-industry-san_xuat_van_tai" onclick="setNhom2Industry('san_xuat_van_tai')" class="w-full text-left p-4 rounded-2xl border transition-all flex items-start gap-4 relative">
+                </div>
+                <div class="w-full text-left p-4 rounded-2xl border border-slate-200 bg-white flex items-start gap-4">
                     <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 shrink-0">
                         <i class="fa-solid fa-industry"></i>
                     </div>
@@ -110,11 +102,8 @@
                         <p class="text-xs text-slate-500 mt-0.5">Sản xuất, vận tải; xây dựng có bao thầu NVL</p>
                         <p class="text-[11px] font-bold text-slate-700 mt-1">GTGT 3% | TNCN 1.5%</p>
                     </div>
-                    <span id="group2-industry-mark-san_xuat_van_tai" class="hidden absolute top-3 right-3 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center">
-                        <i class="fa-solid fa-check text-[10px]"></i>
-                    </span>
-                </button>
-                <button id="group2-industry-noi_dung_so" onclick="setNhom2Industry('noi_dung_so')" class="w-full text-left p-4 rounded-2xl border transition-all flex items-start gap-4 relative">
+                </div>
+                <div class="w-full text-left p-4 rounded-2xl border border-slate-200 bg-white flex items-start gap-4">
                     <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 shrink-0">
                         <i class="fa-solid fa-laptop-code"></i>
                     </div>
@@ -123,11 +112,8 @@
                         <p class="text-xs text-slate-500 mt-0.5">Sản phẩm nội dung, dịch vụ số</p>
                         <p class="text-[11px] font-bold text-slate-700 mt-1">GTGT 0% | TNCN 2%</p>
                     </div>
-                    <span id="group2-industry-mark-noi_dung_so" class="hidden absolute top-3 right-3 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center">
-                        <i class="fa-solid fa-check text-[10px]"></i>
-                    </span>
-                </button>
-                <button id="group2-industry-khac" onclick="setNhom2Industry('khac')" class="w-full text-left p-4 rounded-2xl border transition-all flex items-start gap-4 relative">
+                </div>
+                <div class="w-full text-left p-4 rounded-2xl border border-slate-200 bg-white flex items-start gap-4">
                     <div class="w-10 h-10 rounded-xl bg-slate-100 flex items-center justify-center text-slate-500 shrink-0">
                         <i class="fa-solid fa-store"></i>
                     </div>
@@ -136,13 +122,10 @@
                         <p class="text-xs text-slate-500 mt-0.5">Hoạt động kinh doanh khác</p>
                         <p class="text-[11px] font-bold text-slate-700 mt-1">GTGT 2% | TNCN 1%</p>
                     </div>
-                    <span id="group2-industry-mark-khac" class="hidden absolute top-3 right-3 w-6 h-6 rounded-full bg-emerald-600 text-white flex items-center justify-center">
-                        <i class="fa-solid fa-check text-[10px]"></i>
-                    </span>
-                </button>
+                </div>
             </div>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300">
                 <div class="bg-slate-50 p-8 border-b border-slate-100">
                     <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-bold text-[10px] uppercase">Nhóm 1</span>
@@ -153,8 +136,8 @@
                     <section>
                         <h3 class="font-bold text-slate-400 text-xs uppercase tracking-widest mb-4 flex items-center"><i class="fa-solid fa-file-invoice text-blue-500 mr-2"></i>Biểu mẫu thuế</h3>
                         <div class="space-y-3">
-                            <button onclick="openModal('01/TKN-CNKD')" class="w-full text-left p-3 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 text-sm font-bold transition-all border border-blue-100">01/TKN-CNKD: Thông báo DT năm</button>
-                            <button onclick="openModal('01/BK-STK')" class="w-full text-left p-3 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 text-sm font-bold transition-all border border-slate-100">01/BK-STK: Thông báo TK/Ví</button>
+                            <button onclick="openModal('01/TKN-CNKD')" class="w-full text-left p-3 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 text-sm font-bold transition-all border border-blue-100">01/TKN-CNKD</button>
+                            <button onclick="openModal('01/BK-STK')" class="w-full text-left p-3 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-700 text-sm font-bold transition-all border border-slate-100">01/BK-STK</button>
                         </div>
                     </section>
                     <section>
@@ -202,7 +185,7 @@
                     </section>
                     <section>
                         <h3 class="font-bold text-slate-400 text-xs uppercase tracking-widest mb-4 flex items-center"><i class="fa-solid fa-file-invoice-dollar text-blue-500 mr-2"></i>Biểu mẫu thuế</h3>
-                        <button onclick="openModal('01/CNKD')" class="w-full text-left p-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold shadow-lg transition-all">01/CNKD: Tờ khai Thuế Quý</button>
+                        <button onclick="openModal('01/CNKD')" class="w-full text-left p-4 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold shadow-lg transition-all">01/CNKD</button>
                     </section>
                     <section>
                         <h3 class="font-bold text-slate-400 text-xs uppercase tracking-widest mb-4 flex items-center"><i class="fa-solid fa-table-list text-emerald-500 mr-2"></i>Hệ thống sổ kế toán</h3>
@@ -215,14 +198,41 @@
                 <div class="bg-slate-800 p-8 border-b border-slate-700 text-white">
                     <span class="bg-white/10 text-slate-300 px-3 py-1 rounded-full font-bold text-[10px] uppercase">Nhóm 3</span>
                     <h2 class="text-2xl font-bold mt-3">DT 3 tỷ - 50 tỷ</h2>
-                    <p class="text-slate-400 text-sm mt-2 font-light italic">Kê khai Doanh thu - Chi phí.</p>
+                    <p class="text-slate-400 text-sm mt-2 font-light italic">(Doanh thu – chi phí) x 17%.</p>
                 </div>
                 <div class="p-8 space-y-8">
                     <section>
                         <h3 class="font-bold text-slate-500 text-xs uppercase tracking-widest mb-4 flex items-center"><i class="fa-solid fa-calendar-check text-blue-400 mr-2"></i>Biểu mẫu thuế</h3>
                         <div class="space-y-3">
-                            <button onclick="openModal('01/CNKD')" class="w-full text-left p-3 rounded-xl bg-white/5 hover:bg-white/10 text-white text-sm font-bold border border-white/10 transition-all">01/CNKD: Tờ khai Tạm nộp</button>
-                            <button onclick="openModal('02/QTT-TNCN')" class="w-full text-left p-3 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 text-sm font-bold border border-rose-500/20 transition-all">02/QTT-TNCN: Quyết toán Năm</button>
+                            <button onclick="openModal('01/CNKD')" class="w-full text-left p-3 rounded-xl bg-white/5 hover:bg-white/10 text-white text-sm font-bold border border-white/10 transition-all">01/CNKD</button>
+                            <button onclick="openModal('02/QTT-TNCN')" class="w-full text-left p-3 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 text-sm font-bold border border-rose-500/20 transition-all">02/QTT-TNCN</button>
+                        </div>
+                    </section>
+                    <section>
+                        <h3 class="font-bold text-slate-500 text-xs uppercase tracking-widest mb-4 flex items-center"><i class="fa-solid fa-boxes-stacked text-emerald-400 mr-2"></i>Hệ thống sổ kế toán</h3>
+                        <div class="grid grid-cols-4 gap-2 text-[10px] font-bold text-center text-slate-300">
+                            <button onclick="openModal('S2b-HKD')" class="bg-white/5 border border-white/10 p-2 rounded hover:bg-white/10">S2b</button>
+                            <button onclick="openModal('S2c-HKD')" class="bg-rose-500/20 border border-rose-500/30 p-2 rounded hover:bg-rose-500/30 text-rose-300">S2c</button>
+                            <button onclick="openModal('S2d-HKD')" class="bg-white/5 border border-white/10 p-2 rounded hover:bg-white/10">S2d</button>
+                            <button onclick="openModal('S2e-HKD')" class="bg-white/5 border border-white/10 p-2 rounded hover:bg-white/10">S2e</button>
+                            <button onclick="openModal('S3a-HKD')" class="bg-white/5 border border-white/10 p-2 rounded hover:bg-white/10 col-span-4">S3a (Thuế khác)</button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 rounded-3xl shadow-sm border border-slate-800 overflow-hidden hover:shadow-xl transition-all duration-300">
+                <div class="bg-slate-800 p-8 border-b border-slate-700 text-white">
+                    <span class="bg-white/10 text-slate-300 px-3 py-1 rounded-full font-bold text-[10px] uppercase">Nhóm 4</span>
+                    <h2 class="text-2xl font-bold mt-3">DT &gt; 50 tỷ</h2>
+                    <p class="text-slate-400 text-sm mt-2 font-light italic">(Doanh thu – chi phí) x 20%.</p>
+                </div>
+                <div class="p-8 space-y-8">
+                    <section>
+                        <h3 class="font-bold text-slate-500 text-xs uppercase tracking-widest mb-4 flex items-center"><i class="fa-solid fa-calendar-check text-blue-400 mr-2"></i>Biểu mẫu thuế</h3>
+                        <div class="space-y-3">
+                            <button onclick="openModal('01/CNKD')" class="w-full text-left p-3 rounded-xl bg-white/5 hover:bg-white/10 text-white text-sm font-bold border border-white/10 transition-all">01/CNKD</button>
+                            <button onclick="openModal('02/QTT-TNCN')" class="w-full text-left p-3 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 text-sm font-bold border border-rose-500/20 transition-all">02/QTT-TNCN</button>
                         </div>
                     </section>
                     <section>
@@ -272,6 +282,7 @@
             </div>
         </details>
     </main>
+
 
     <div id="modal" class="fixed inset-0 z-50 flex items-center justify-center opacity-0 pointer-events-none modal transition-all duration-300 px-2 md:px-6">
         <div class="fixed inset-0 bg-slate-900/80 backdrop-blur-md" onclick="closeModal()"></div>
